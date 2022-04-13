@@ -3,21 +3,25 @@ const UserModel = require("../Models/user.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { signUpErrors } = require("../error-handling/index");
-
+//route ok
 module.exports.signUp = async (req, res) => {
-  const { pseudo, email, password } = req.body;
+  const { pseudo, finess, email, password } = req.body;
+  console.log(req.body);
 
   try {
-    const user = await UserModel.create({ pseudo, email, password });
-    res.status(201).json({ user: user._id });
+    const user = await UserModel.create({ pseudo, finess, email, password });
+    res.status(201).json({
+      Association: ` l'Association  ${user.pseudo} a été créée avec succés`,
+    });
   } catch (err) {
+    console.log(err);
+
     const errors = signUpErrors(err); // on envoie le err dans la fonction
     res.status(201).send(errors);
   }
 };
-
+//route ok  cookie ou pas cookie?
 module.exports.signIn = async (req, res) => {
-  const maxAge = 3600000;
   const { email, password } = req.body;
 
   const foundUser = await UserModel.findOne({ email });
@@ -37,7 +41,6 @@ module.exports.signIn = async (req, res) => {
       algorithm: "HS256",
       expiresIn: "1h",
     });
-    res.cookie("jwt", authToken, { httpOnly: true, maxAge }); // le cookie on en fait quoi ?
     res.status(200).send({ authToken: authToken });
     return;
   } else {
@@ -45,6 +48,7 @@ module.exports.signIn = async (req, res) => {
   }
 };
 
+//route a verifier?
 module.exports.logOut = async (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 });
   res.redirect("/");
