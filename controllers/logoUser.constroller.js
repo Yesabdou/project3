@@ -4,7 +4,7 @@ const { promisify } = require("util");
 const pipeline = promisify(require("stream").pipeline);
 
 module.exports.uploadLogo = async (req, res) => {
-  //1 installer multer    npm i multer
+  //1 installer multer npm i multer
 
   const fileName = req.body.name + ".jpg";
   await pipeline(

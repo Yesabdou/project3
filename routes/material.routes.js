@@ -1,6 +1,10 @@
 const router = require("express").Router();
-const materialController = require("../controllers/material.controller");
+const MaterialController = require("../controllers/material.controller");
 
-router.post("/new", materialController.newMaterial);
+router.get("/", MaterialController.getAllMaterials);
+router.get("/:id", MaterialController.getOneMaterial);
+router.put("/:id", MaterialController.updateMaterial);
+router.delete("/:id", MaterialController.deleteMaterial);
+router.post("/new", MaterialController.newMaterial);
 
 module.exports = router;
