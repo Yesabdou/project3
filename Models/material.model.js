@@ -12,10 +12,10 @@ const materialSchema = new mongoose.Schema(
       unique: true,
     },
     owner: {
-      type: [Schema.Types.ObjectId],
-      ref: "UserModel",
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
-    categorie: {
+    category: {
       enum: ["Fauteuil roulant", "Chaise adaptée", "Matériel ludique"],
       default: "",
     },
@@ -45,6 +45,6 @@ const materialSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const MaterialModel = mongoose.model("material", materialSchema);
+const MaterialModel = mongoose.model("Material", materialSchema);
 
 module.exports = MaterialModel;
