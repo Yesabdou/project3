@@ -2,8 +2,6 @@ const router = require("express").Router();
 const authController = require("../controllers/auth.controller");
 const logoUserController = require("../controllers/logoUser.constroller");
 const userController = require("../controllers/user.controller");
-const multer = require("multer");
-const upload = multer();
 
 const { isAuthenticated } = require("../Middleware/jwt.middleware");
 
@@ -24,10 +22,10 @@ router.patch("/addWishlist/:id", userController.addWishlist);
 router.patch("/deletematerial/:id", userController.deleteMaterial);
 
 //user logo
-router.post(
-  "/uploadlogo",
-  upload.single("file"),
-  logoUserController.uploadLogo
-);
+// router.post(
+//   "/uploadlogo",
+//   upload.single("file"),
+//   logoUserController.uploadLogo
+// );
 
 module.exports = router;
