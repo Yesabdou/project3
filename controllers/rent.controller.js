@@ -1,29 +1,55 @@
 const RentModel = require("../Models/Rent.model")
 
-module.exports.addNewRent = async (req, res) => {
-   const rent = await RentModel.create();
-   res.status(201).json(rent)
+module.exports.saveNewRent = async (req, res) => {
+   try {
+     const {
+       materialID,
+       ownerID,
+       startDate,
+       endDate,
+       status,
+       rentedTo,
+       adresse,
+     } = req.body;
+     const rent = await RentModel.create({
+      materialID,
+      ownerID,
+      startDate,
+      endDate,
+      status,
+      rentedTo,
+      adresse,
+     });
+     res.status(201).json({ rent: rent._id });
+   } catch (error) {
+     console.log(error);
+   }
+ };
+
+module.exports.seeAllRentsForOneUser = async (req, res) => {
+   const rents = await RentModel.find({ownerId: req.params.userid});
+   res.json(rents)
 }
 
-module.exports.seeAllRents = async (req, res) => {
-   const rents = await RentModel.find({ownerId: req.params.id});
+module.exports.seeAllRentsForOneMaterial = async (req, res) => {
+   const rents = await RentModel.find({materialId: req.params.materialid});
    res.json(rents)
 }
 
 module.exports.seeOneRent = async (req, res) => {
-   const rent = await RentModel.findById(req.params.id);
+   const rent = await RentModel.findById(req.params.rentid);
    res.json(rent)
 }
 
 module.exports.updateOneRent = async (req, res) => {
    try {
-      await RentModel.findByIdAndUpdate(
-         { _id: req.params.id },
-         { new: true, upsert: true, setDefaultsOnInsert: true },
-         (err, docs) => {
-           return res.send(docs);
-         });
-      
+        const updatedRent = await RentModel.findByIdAndUpdate(
+            req.params.rentid,
+            req.body,
+            { new: true},
+            );
+            res.json(updatedRent)
+            
    } catch (error) {
       console.log(error);
    } 

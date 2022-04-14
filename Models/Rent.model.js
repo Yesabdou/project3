@@ -39,7 +39,7 @@ const rentSchema = new mongoose.Schema(
         required: true,
     },
 
-    address: {
+    adresse: {
         type: String,
         required: true,
     }
