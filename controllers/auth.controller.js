@@ -3,24 +3,44 @@ const UserModel = require("../Models/user.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { signUpErrors } = require("../error-handling/index");
+const axios = require("axios");
+
 //route ok
 module.exports.signUp = async (req, res) => {
-  const { pseudo, finess, email, password } = req.body;
-  console.log(req.body);
+  const { pseudo, adresse, finess, email, password } = req.body;
+
+  const str = adresse.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // pour enlever les accents des e et a pour la requette
 
   try {
-    const user = await UserModel.create({ pseudo, finess, email, password });
+    // requette axios pour recuperer la lon et la lat a partir de la req.body adresse
+    const result = await axios.get(
+      `https://eu1.locationiq.com/v1/search.php?key=pk.4d8a87420e294c48e5a612ff6316fc35&q=${str}&format=json`
+    );
+    console.log("heeeeeeeeey");
+    console.log(result.data[0].lat);
+    const latitude = result.data[0].lat;
+    const longitude = result.data[0].lon;
+
+    const user = await UserModel.create({
+      pseudo,
+      adresse,
+      finess,
+      email,
+      password,
+      latitude,
+      longitude,
+    });
     res.status(201).json({
       Association: ` l'Association  ${user.pseudo} a été créée avec succés`,
     });
   } catch (err) {
     console.log(err);
 
-    const errors = signUpErrors(err); // on envoie le err dans la fonction
+    const errors = signUpErrors(err); // on envoie le err dans la fonction pour la traiter
     res.status(201).send(errors);
   }
 };
-//route ok  cookie ou pas cookie?
+//route ok
 module.exports.signIn = async (req, res) => {
   const { email, password } = req.body;
 
@@ -48,8 +68,4 @@ module.exports.signIn = async (req, res) => {
   }
 };
 
-//route a verifier?
-module.exports.logOut = async (req, res) => {
-  res.cookie("jwt", "", { maxAge: 1 });
-  res.redirect("/");
-};
+//logout à faire dnas le front en supprimeant le local storage

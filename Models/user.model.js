@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       minLength: 3,
-      maxLength: 14,
+      maxLength: 50,
       unique: true,
       trim: true,
     },
@@ -20,6 +20,8 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+      minlength: 9,
+      maxlength: 9,
     },
     email: {
       type: String,
@@ -29,14 +31,18 @@ const userSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
-    phone: {
-      type: String,
-      unique: true,
-      trim: true,
-    },
     adresse: {
       type: String,
       trim: true,
+    },
+    phone: {
+      type: String,
+    },
+    latitude: {
+      type: String,
+    },
+    longitude: {
+      type: String,
     },
     password: {
       type: String,

@@ -1,128 +1,132 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 require("../config/database");
 
-const User = require('../Models/user.model')
-
+const User = require("../Models/user.model");
 
 const users = [
-    {
-      pseudo: "jojo22",
-      finess: "1234",
-      nomAssociation: "SOS Espoir",
-      adresse: "57 bd Charonne, 75011 Paris",
-      téléphone: "0145252210",
-      email: "example@gmail.com",
-      password: "ht$vcD\"3u?L>;#j[",
-      picture: "http://placehold.it/32x32",
-      bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo sed egestas egestas fringilla phasellus faucibus."
-    },
-    {
-      pseudo: "jeanot33",
-      finess: "1111",
-      nomAssociation: "SOS Futures Mères",
-      adresse: "23 r Rocroy, 75010 Paris",
-      téléphone: "0145252211",
-      email: "example1@gmail.com",
-      password: "<PuU\\Uj\"r38&/Z;W",
-      picture: "http://placehold.it/32x32",
-      bio: "Vivamus arcu felis bibendum ut. Lacus vestibulum sed arcu non odio euismod lacinia. Amet nisl purus in mollis nunc sed id. "
-    },
-    {
-      pseudo: "xvdmrpk",
-      finess: "2222",
-      nomAssociation: "Fédération des Aveugles et Amblyopes de France",
-      adresse: "6 r Gager Gabillot, 75015 Paris",
-      téléphone: "0145252212",
-      email: "example2@gmail.com",
-      password: "4hEuBSWEw7Eevt8t",
-      picture: "http://placehold.it/32x32",
-      bio: "Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper. Semper eget duis at tellus at urna condimentum mattis pellentesque."
-    },
-    {
-      pseudo: "abdou99",
-      finess: "3333",
-      nomAssociation: "Médecins Sans Frontières",
-      adresse: "34 av Jean Jaurès, 75019 Paris ",
-      téléphone: "0145252213",
-      email: "example3@gmail.com",
-      password: "fKntZsSDMn3sBaJN",
-      picture: "http://placehold.it/32x32",
-      bio: "Lacus laoreet non curabitur gravida arcu ac tortor dignissim convallis. Quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus."
-    },
-    {
-      pseudo: "marco99",
-      finess: "4444",
-      nomAssociation: "Forum réfugiés-Cosi",
-      adresse: "3 bd Richard Lenoir, 75011 Paris",
-      téléphone: "0145252214",
-      email: "example4@gmail.com",
-      password: "RQDC7XyuUvMsp9V2",
-      picture: "http://placehold.it/32x32",
-      bio: "Arcu non sodales neque sodales ut etiam sit. Nisl tincidunt eget nullam non nisi est sit."
-    },
-    {
-      pseudo: "joshua12",
-      finess: "5555",
-      nomAssociation: "Fondation Brigitte Bardot",
-      adresse: "28 r Vineuse, 75116 Paris ",
-      téléphone: "0145252215",
-      email: "example5@gmail.com",
-      password: "M8qb8DshguU62Lz3",
-      picture: "http://placehold.it/32x32",
-      bio: "Semper eget duis at tellus at urna condimentum mattis pellentesque. Netus et malesuada fames ac."
-    },
-    {
-      pseudo: "yoyoyo43",
-      finess: "6666",
-      nomAssociation: "Fondation Française de l'Ordre de Malte",
-      adresse: "42 r Volontaires, 75015 Paris",
-      téléphone: "0145252216",
-      email: "example6@gmail.com",
-      password: "37xWQkgj8thwHyxj",
-      picture: "http://placehold.it/32x32",
-      bio: "Lacus laoreet non curabitur gravida arcu ac tortor dignissim convallis. Quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus."
-    },
-    {
-      pseudo: "mr55MM",
-      finess: "7777",
-      nomAssociation: "Secours Catholique",
-      adresse: "106 r Bac, 75007 Paris ",
-      téléphone: "0145252217",
-      email: "example7@gmail.com",
-      password: "G3wU8j7r3MC32yxE",
-      picture: "http://placehold.it/32x32",
-      bio: "Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper. Semper eget duis at tellus at urna condimentum mattis pellentesque."
-    },
-    {
-      pseudo: "elisa88",
-      finess: "8888",
-      nomAssociation: "Apprentis D'Auteuil Fondation d'Auteuil",
-      adresse: "40 r Jean de la Fontaine, 75016 Paris",
-      téléphone: "0145252218",
-      email: "example8@gmail.com",
-      password: "6aKDCqW62K7p33fg",
-      picture: "http://placehold.it/32x32",
-      bio: "Arcu non sodales neque sodales ut etiam sit. Nisl tincidunt eget nullam non nisi est sit."
-    },
-    {
-      pseudo: "projet11",
-      finess: "9999",
-      nomAssociation: "Fondation De France",
-      adresse: "40 av Hoche, 75008 Paris",
-      téléphone: "0145252219",
-      email: "example9@gmail.com",
-      password: "6dDv2VZV2BpLJEHM",
-      picture: "http://placehold.it/32x32",
-      bio: "Semper eget duis at tellus at urna condimentum mattis pellentesque. Netus et malesuada fames ac."
-    }
-  ];
+  {
+    pseudo: "À chacun ses vacances",
+    finess: "497556851",
+    email: "asso1@hotmail.fr",
+    adresse: "139 rue des Pyrénées - Bagnères 93 - 75020 Paris ",
+    phone: "01 43 70 45 31",
+    latitude: "",
+    longitude: "",
+    password: "azerty",
+    picture:
+      "https://w7.pngwing.com/pngs/682/603/png-transparent-grant-stairlift-funding-loan-disabled-child-child-loan-cartoon.png",
+    bio: "Porter la voix des usagers. Informer, conseiller les usagers, former les représentants des usagers. Porter un plaidoyer sur les droits des patients.",
+    wishlit: "",
+  },
+  {
+    pseudo: "ASMF – Association Handisport de Paris",
+    finess: "497895852",
+    email: "asso2@hotmail.fr",
+    adresse: "33, rue de la Roquette - Bat C2 - 75011 Paris ",
+    phone: "06 12 73 90 42",
+    latitude: "",
+    longitude: "",
+    password: "azerty",
+    picture:
+      "https://w7.pngwing.com/pngs/682/603/png-transparent-grant-stairlift-funding-loan-disabled-child-child-loan-cartoon.png",
+    bio: "Porter la voix des usagers. Informer, conseiller les usagers, former les représentants des usagers. Porter un plaidoyer sur les droits des patients.",
+    wishlit: "",
+  },
+  {
+    pseudo:
+      "CATRED -Collectif des Accidentés du Travail, handicapés et Retraités pour l’Égalité des Droits",
+    finess: "497895853",
+    email: "asso3@hotmail.fr",
+    adresse: "20, boulevard Voltaire - 75011 Paris ",
+    phone: "01 40 21 38 11",
+    latitude: "",
+    longitude: "",
+    password: "azerty",
+    picture:
+      "https://w7.pngwing.com/pngs/682/603/png-transparent-grant-stairlift-funding-loan-disabled-child-child-loan-cartoon.png",
+    bio: "Porter la voix des usagers. Informer, conseiller les usagers, former les représentants des usagers. Porter un plaidoyer sur les droits des patients.",
+    wishlit: "",
+  },
+  {
+    pseudo: "FMH-UD de Paris – Fédération des Malades et Handicapés",
+    finess: "497588954",
+    email: "asso4@hotmail.fr",
+    adresse: "58 rue de Merlin - 75011 Paris ",
+    phone: "01 43 55 97 74",
+    latitude: "",
+    longitude: "",
+    password: "azerty",
+    picture:
+      "https://w7.pngwing.com/pngs/682/603/png-transparent-grant-stairlift-funding-loan-disabled-child-child-loan-cartoon.png",
+    bio: "Porter la voix des usagers. Informer, conseiller les usagers, former les représentants des usagers. Porter un plaidoyer sur les droits des patients.",
+    wishlit: "",
+  },
+  {
+    pseudo: "Advocacy Paris Île de France",
+    finess: "497589855",
+    email: "asso5@hotmail.fr",
+    adresse: "5 place des Fêtes - 75019 Paris ",
+    phone: "01 46 07 18 18",
+    latitude: "",
+    longitude: "",
+    password: "azerty",
+    picture:
+      "https://w7.pngwing.com/pngs/682/603/png-transparent-grant-stairlift-funding-loan-disabled-child-child-loan-cartoon.png",
+    bio: "Porter la voix des usagers. Informer, conseiller les usagers, former les représentants des usagers. Porter un plaidoyer sur les droits des patients.",
+    wishlit: "",
+  },
+  {
+    pseudo: "CoActis Santé",
+    finess: "497895856",
+    email: "asso6@hotmail.fr",
+    adresse: "85 boulevard de Port Royal - 75013 Paris ",
+    phone: "",
+    latitude: "",
+    longitude: "",
+    password: "azerty",
+    picture:
+      "https://w7.pngwing.com/pngs/682/603/png-transparent-grant-stairlift-funding-loan-disabled-child-child-loan-cartoon.png",
+    bio: "Porter la voix des usagers. Informer, conseiller les usagers, former les représentants des usagers. Porter un plaidoyer sur les droits des patients.",
+    wishlit: "",
+  },
+  {
+    pseudo: "CRéDAVIS",
+    finess: "497589857",
+    email: "asso7@hotmail.fr",
+    adresse: "Chemin des Gravilliers - 75016 Paris ",
+    phone: "01 42 88 84 06",
+    latitude: "",
+    longitude: "",
+    password: "azerty",
+    picture:
+      "https://w7.pngwing.com/pngs/682/603/png-transparent-grant-stairlift-funding-loan-disabled-child-child-loan-cartoon.png",
+    bio: "Porter la voix des usagers. Informer, conseiller les usagers, former les représentants des usagers. Porter un plaidoyer sur les droits des patients.",
+    wishlit: "",
+  },
+  {
+    pseudo: "France Assos Santé Île-de-France",
+    finess: "497590850",
+    email: "asso8@hotmail.fr",
+    adresse: "28 boulevard Pereire - 75017 Paris ",
+    phone: "01 43 29 92 38",
+    latitude: "",
+    longitude: "",
+    password: "azerty",
+    picture:
+      "https://w7.pngwing.com/pngs/682/603/png-transparent-grant-stairlift-funding-loan-disabled-child-child-loan-cartoon.png",
+    bio: "Porter la voix des usagers. Informer, conseiller les usagers, former les représentants des usagers. Porter un plaidoyer sur les droits des patients.",
+    wishlit: "",
+  },
+];
 
 User.create(users)
-  .then(users => {
+  .then((users) => {
     console.log(`Created ${users.length} users`);
- 
+
     // Once created, close the DB connection
     mongoose.connection.close();
   })
-  .catch(err => console.log(`An error occurred while adding users from the DB: ${err}`));
+  .catch((err) =>
+    console.log(`An error occurred while adding users from the DB: ${err}`)
+  );
