@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // server
 app.listen(process.env.PORT, () => {
-  console.log(`Listening on port ${process.env.MONGODB_URI}`);
+  console.log(`Listening on port ${process.env.PORT}`);
 });
 
 // routes

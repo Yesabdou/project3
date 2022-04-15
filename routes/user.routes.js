@@ -13,7 +13,7 @@ router.post("/register", authController.signUp);
 router.post("/login", authController.signIn);
 
 //user DB
-router.get("/", isAuthenticated, userController.getAllUsers);
+router.get("/", userController.getAllUsers);
 router.get("/:id", userController.getOneUser);
 router.put("/:id/update", userController.updateUser);
 router.delete("/:id/delete", userController.deleteUser);
