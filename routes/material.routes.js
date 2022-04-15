@@ -7,14 +7,12 @@ router.get("/", MaterialController.getAllMaterials);
 router.get("/:id", MaterialController.getOneMaterial);
 router.put("/:id", MaterialController.updateMaterial);
 router.delete("/:id", MaterialController.deleteMaterial);
-router.get("/new")
 router.post("/new", MaterialController.newMaterial);
 
 // rent routes
-router.get("/:id/new-rent");
-router.post("/:id/new-rent", fileUploader.single("image"), RentController.addNewRent);
-router.get("/:id/all-rents", RentController.seeAllRents);
-router.get("/:id/rent/:id", RentController.seeOneRent);
-router.patch("/:id/rent/:id", fileUploader.single("image"), RentController.updateOneRent);
+router.post("/:materialid/rents", fileUploader.single("image"), RentController.saveNewRent); // route OK
+router.get("/:materialid/all-rents", RentController.seeAllRentsForOneMaterial); // route OK
+router.get("/:materialid/rent/:rentid", RentController.seeOneRent); // route OK
+router.patch("/:materialid/rent/:rentid", fileUploader.single("image"), RentController.updateOneRent); // route OK
 
 module.exports = router;
