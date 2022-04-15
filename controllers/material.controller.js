@@ -57,6 +57,7 @@ module.exports.deleteMaterial = async (req, res) => {
 //route ok
 module.exports.updateMaterial = async (req, res) => {
   try {
+
     const updatedMat = await MaterialModel.findByIdAndUpdate(
       req.params.id,
       req.body,
