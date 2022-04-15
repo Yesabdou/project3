@@ -2,18 +2,23 @@ const MaterialModel = require("../Models/material.model");
 
 //route ok / faire le liens avec owner
 module.exports.newMaterial = async (req, res) => {
-  console.log(req.body);
   try {
     const {
       name,
       ref,
-
       category,
       description,
       condition,
       ageMin,
       ageMax,
+      picture,
     } = req.body;
+    let pic;
+        if (req.file) {
+        pic = req.file.path;
+        } else {
+        pic = picture;
+    }
     const material = await MaterialModel.create({
       name,
       ref,
@@ -22,7 +27,7 @@ module.exports.newMaterial = async (req, res) => {
       condition,
       ageMin,
       ageMax,
-    });
+      picture: pic});
     res.status(201).json({ material: material._id });
   } catch (error) {
     console.log(error);
