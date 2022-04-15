@@ -14,10 +14,10 @@ module.exports.newMaterial = async (req, res) => {
       picture,
     } = req.body;
     let pic;
-        if (req.file) {
-        pic = req.file.path;
-        } else {
-        pic = picture;
+    if (req.file) {
+      pic = req.file.path;
+    } else {
+      pic = picture;
     }
     const material = await MaterialModel.create({
       name,
@@ -27,7 +27,8 @@ module.exports.newMaterial = async (req, res) => {
       condition,
       ageMin,
       ageMax,
-      picture: pic});
+      picture: pic,
+    });
     res.status(201).json({ material: material._id });
   } catch (error) {
     console.log(error);
@@ -56,12 +57,14 @@ module.exports.deleteMaterial = async (req, res) => {
 //route ok
 module.exports.updateMaterial = async (req, res) => {
   try {
-    const updatedMaterial = await MaterialModel.findByIdAndUpdate(
-        req.params.rentid,
-        req.body,
-        { new: true},
-        );
-        res.json(updatedMaterial)
+
+    const updatedMat = await MaterialModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      //{ $set: { ref: req.body.ref } },
+      { new: true, upsert: true, setDefaultsOnInsert: true }
+    );
+    res.status(201).json(updatedMat);
   } catch (error) {
     console.log(error);
   }

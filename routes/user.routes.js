@@ -2,7 +2,7 @@ const router = require("express").Router();
 const authController = require("../controllers/auth.controller");
 const logoUserController = require("../controllers/logoUser.constroller");
 const userController = require("../controllers/user.controller");
-const RentController =require("../controllers/rent.controller")
+const RentController = require("../controllers/rent.controller");
 
 const { isAuthenticated } = require("../Middleware/jwt.middleware");
 
@@ -14,11 +14,11 @@ router.post("/login", authController.signIn);
 
 //user DB
 router.get("/", isAuthenticated, userController.getAllUsers);
-router.get("/:id", userController.getOneUser); //route OK
-router.put("/:id/update", userController.updateUser); //route OK
-router.delete("/:id/delete", userController.deleteUser); // route OK
-router.patch("/addWishlist/:id", userController.addWishlist);// a voir plus tard
-router.patch("/deletematerial/:id", userController.deleteMaterial); // a voir plus tard
+router.get("/:id", userController.getOneUser);
+router.put("/:id/update", userController.updateUser);
+router.delete("/:id/delete", userController.deleteUser);
+router.patch("/addWishlist/:id", userController.addWishlist);
+router.patch("/delWishlist/:id", userController.deleteWishlist);
 
 //rent route
 router.get("/:userid/all-rents", RentController.seeAllRentsForOneUser); // route OK
