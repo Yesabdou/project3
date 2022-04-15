@@ -22,14 +22,14 @@ module.exports.updateUser = async (req, res) => {
     return res.status(400).send("ID unknown : " + req.params.id);
 
   try {
-    await UserModel.findByIdAndUpdate(
-      { _id: req.params.id },
-      { $set: { bio: req.body.bio } },
-      { new: true, upsert: true, setDefaultsOnInsert: true },
-      (err, docs) => {
-        return res.send(docs);
-      }
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      req.params.id,
+
+      req.body,
+      // { $set: { bio: req.body.bio, finess: req.body.finess, phone:req.body.phone,  } },
+      { new: true, upsert: true, setDefaultsOnInsert: true }
     );
+    res.status(201).json(updatedUser);
   } catch (error) {
     console.log(error);
   }
@@ -58,18 +58,9 @@ module.exports.addWishlist = async (req, res) => {
     },
     { new: true, upsert: true }
   );
-  console.log(`id of material ${req.body.materialIdToAdd}`);
-
-  await MaterialModel.findByIdAndUpdate(
-    req.body.materialIdToAdd,
-    {
-      $addToSet: { wishlist: userId },
-    },
-    { new: true, upsert: true }
-  );
 };
 //fonction qui supprimer le matériel de l'utilisateur et vis versa
-module.exports.deleteMaterial = async (req, res) => {
+module.exports.deleteWishlist = async (req, res) => {
   const userId = req.params.id;
   await UserModel.findByIdAndUpdate(
     req.params.id,
@@ -79,12 +70,4 @@ module.exports.deleteMaterial = async (req, res) => {
     { new: true, upsert: true }
   );
   console.log(`id of material ${req.body.materialIdToDel}`);
-
-  await MaterialModel.findByIdAndUpdate(
-    req.body.materialIdToDel,
-    {
-      $pull: { ownedBy: userId },
-    },
-    { new: true, upsert: true }
-  );
 };

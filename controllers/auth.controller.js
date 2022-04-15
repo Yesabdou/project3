@@ -54,7 +54,7 @@ module.exports.signIn = async (req, res) => {
   }
 
   if (bcrypt.compareSync(password, foundUser.password)) {
-    const payload = { email };
+    const payload = { id: foundUser._id, email };
 
     // creer une token  use the mail, the secret key in .ENV and crete a token-
     const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
