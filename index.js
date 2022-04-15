@@ -7,11 +7,20 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/user.routes");
 const materialRoutes = require("./routes/material.routes");
+const cors = require('cors');  
 const session = require("express-session");
 
 const UserModel = require("./Models/user.model");
 
 const app = express();
+
+app.use(
+  cors({
+    origin: ['http://localhost:3000']  
+  })
+);
+
+app.set('trust proxy', 1);
 
 //pour les fichierJson
 app.use(bodyParser.json());
