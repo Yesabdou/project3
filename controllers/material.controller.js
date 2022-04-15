@@ -56,14 +56,12 @@ module.exports.deleteMaterial = async (req, res) => {
 //route ok
 module.exports.updateMaterial = async (req, res) => {
   try {
-    await MaterialModel.findByIdAndUpdate(
-      { _id: req.params.id },
-      { $set: { ref: req.body.ref } },
-      { new: true, upsert: true, setDefaultsOnInsert: true },
-      (err, docs) => {
-        return res.send(docs);
-      }
-    );
+    const updatedMaterial = await MaterialModel.findByIdAndUpdate(
+        req.params.rentid,
+        req.body,
+        { new: true},
+        );
+        res.json(updatedMaterial)
   } catch (error) {
     console.log(error);
   }
