@@ -12,11 +12,11 @@ module.exports.signUp = async (req, res) => {
   const str = adresse.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // pour enlever les accents des e et a pour la requette
 
   try {
-    // requette axios pour recuperer la lon et la lat a partir de la req.body adresse
+    // requete axios pour recuperer la lon et la lat a partir de la req.body adresse
     const result = await axios.get(
       `https://eu1.locationiq.com/v1/search.php?key=pk.4d8a87420e294c48e5a612ff6316fc35&q=${str}&format=json`
     );
-    console.log("heeeeeeeeey");
+
     console.log(result.data[0].lat);
     const latitude = result.data[0].lat;
     const longitude = result.data[0].lon;

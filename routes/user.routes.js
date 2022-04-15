@@ -6,6 +6,8 @@ const RentController =require("../controllers/rent.controller")
 
 const { isAuthenticated } = require("../Middleware/jwt.middleware");
 
+// const fileUploader = require('../config/cloudinary.config');
+
 // auth
 router.post("/register", authController.signUp);
 router.post("/login", authController.signIn);
