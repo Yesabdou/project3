@@ -33,6 +33,7 @@ module.exports.signUp = async (req, res) => {
     });
     res.status(201).json({
       Association: ` l'Association  ${user.pseudo} a été créée avec succés`,
+      id: user.id,
     });
   } catch (err) {
     console.log(err);
