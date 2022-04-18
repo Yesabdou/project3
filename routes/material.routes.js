@@ -5,9 +5,9 @@ const fileUploader = require('../config/cloudinary.config');
 
 router.get("/", MaterialController.getAllMaterials);
 router.get("/:id", MaterialController.getOneMaterial);
-router.put("/:id", MaterialController.updateMaterial);
+router.put("/:id", fileUploader.single("image"), MaterialController.updateMaterial);
 router.delete("/:id", MaterialController.deleteMaterial);
-router.post("/new", MaterialController.newMaterial);
+router.post("/new", fileUploader.single("image"), MaterialController.newMaterial);
 
 // rent routes
 router.post("/:materialid/rents", fileUploader.single("image"), RentController.saveNewRent); // route OK

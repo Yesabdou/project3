@@ -19,7 +19,7 @@ router.get('/verify', isAuthenticated, (req, res, next) => {
 //user DB
 router.get("/", userController.getAllUsers);
 router.get("/:id", userController.getOneUser);
-router.put("/:id/update", userController.updateUser);
+router.put("/:id/update", fileUploader.single("image"), userController.updateUser);
 router.delete("/:id/delete", userController.deleteUser);
 router.patch("/addWishlist/:id", userController.addWishlist);
 router.patch("/delWishlist/:id", userController.deleteWishlist);

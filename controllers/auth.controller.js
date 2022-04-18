@@ -8,6 +8,7 @@ const axios = require("axios");
 //route ok
 module.exports.signUp = async (req, res) => {
   const { pseudo, adresse, finess, email, password } = req.body;
+  console.log(req.body)
 
   const str = adresse.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // pour enlever les accents des e et a pour la requette
 
