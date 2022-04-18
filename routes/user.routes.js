@@ -11,6 +11,10 @@ const { isAuthenticated } = require("../Middleware/jwt.middleware");
 // auth
 router.post("/register", authController.signUp);
 router.post("/login", authController.signIn);
+router.get('/verify', isAuthenticated, (req, res, next) => {
+    console.log(`req.payload`, req.payload);
+    res.status(200).json(req.payload);
+  });
 
 //user DB
 router.get("/", userController.getAllUsers);
