@@ -3,6 +3,7 @@ const authController = require("../controllers/auth.controller");
 const logoUserController = require("../controllers/logoUser.constroller");
 const userController = require("../controllers/user.controller");
 const RentController = require("../controllers/rent.controller");
+const fileUploader = require('../config/cloudinary.config');
 
 const { isAuthenticated } = require("../Middleware/jwt.middleware");
 
