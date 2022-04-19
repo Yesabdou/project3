@@ -3,8 +3,8 @@ const RentModel = require("../Models/Rent.model")
 module.exports.saveNewRent = async (req, res) => {
    try {
      const {
-       materialID,
-       ownerID,
+       materialId,
+       ownerId,
        startDate,
        endDate,
        status,
@@ -12,8 +12,8 @@ module.exports.saveNewRent = async (req, res) => {
        adresse,
      } = req.body;
      const rent = await RentModel.create({
-      materialID,
-      ownerID,
+      materialId,
+      ownerId,
       startDate,
       endDate,
       status,
