@@ -63,7 +63,8 @@ module.exports.signIn = async (req, res) => {
       algorithm: "HS256",
       expiresIn: "1h",
     });
-    res.status(200).send({ authToken: authToken });
+    res.status(200).send({ authToken: authToken , id: foundUser._id });
+    
     return;
   } else {
     res.status(401).json({ error: "Mot de pass incorrect" });
