@@ -17,7 +17,7 @@ const app = express();
 app.use(
   cors({
     credentials: true,
-    origin: process.env.ORIGIN ||  ['http://localhost:3000' , "https://handishare.netlify"] 
+    origin: JSON.parse(process.env.ORIGIN) ||  ['http://localhost:3000' , "https://handishare.netlify"] 
   })
 );
 
