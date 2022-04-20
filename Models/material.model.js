@@ -54,7 +54,7 @@ materialSchema.pre("save", async function (next) {
 
     return ref;
   };
-  ref = makeRef();
+  this.ref = makeRef();
   next();
 });
 
