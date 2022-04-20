@@ -8,7 +8,6 @@ const materialSchema = new mongoose.Schema(
     },
     ref: {
       type: String,
-      required: true,
       unique: true,
     },
     owner: {
@@ -44,6 +43,20 @@ const materialSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+materialSchema.pre("save", async function (next) {
+  const makeRef = () => {
+    let ref = "";
+    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    for (let i = 0; i < 5; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return ref;
+  };
+  ref = makeRef();
+  next();
+});
 
 const MaterialModel = mongoose.model("Material", materialSchema);
 
