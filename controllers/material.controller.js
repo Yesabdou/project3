@@ -12,13 +12,13 @@ module.exports.newMaterial = async (req, res) => {
       condition,
       ageMin,
       ageMax,
-      image,
+      picture,
     } = req.body;
     let pic;
     if (req.file) {
       pic = req.file.path;
     } else {
-      pic = image;
+      pic = picture;
     }
     const material = await MaterialModel.create({
       name,
