@@ -3,7 +3,7 @@ const MaterialModel = require("../Models/material.model");
 //route ok / faire le liens avec owner
 module.exports.newMaterial = async (req, res) => {
   try {
-    console.log("i am in the back")
+    console.log("i am in the back");
     const {
       name,
       ref,
@@ -13,6 +13,7 @@ module.exports.newMaterial = async (req, res) => {
       ageMin,
       ageMax,
       picture,
+      owner,
     } = req.body;
     let pic;
     if (req.file) {
@@ -29,11 +30,12 @@ module.exports.newMaterial = async (req, res) => {
       ageMin,
       ageMax,
       picture: pic,
+      owner,
     });
     res.status(201).json({ material: material._id });
   } catch (error) {
     console.log(error);
-    res.status(500).json({error: error.message})
+    res.status(500).json({ error: error.message });
   }
 };
 //route ok
@@ -43,7 +45,9 @@ module.exports.getAllMaterials = async (req, res) => {
 };
 // route ok
 module.exports.getOneMaterial = async (req, res) => {
-  const material = await MaterialModel.findById(req.params.id).populate("owner");
+  const material = await MaterialModel.findById(req.params.id).populate(
+    "owner"
+  );
   res.json(material);
 };
 
@@ -85,8 +89,7 @@ module.exports.updateMaterial = async (req, res) => {
       ageMin,
       ageMax,
       picture: pic,
-    }
-    );
+    });
     res.status(201).json(updatedMat);
   } catch (error) {
     console.log(error);
