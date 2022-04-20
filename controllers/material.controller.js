@@ -3,6 +3,7 @@ const MaterialModel = require("../Models/material.model");
 //route ok / faire le liens avec owner
 module.exports.newMaterial = async (req, res) => {
   try {
+    console.log("i am in the back")
     const {
       name,
       ref,
@@ -11,13 +12,13 @@ module.exports.newMaterial = async (req, res) => {
       condition,
       ageMin,
       ageMax,
-      picture,
+      image,
     } = req.body;
     let pic;
     if (req.file) {
       pic = req.file.path;
     } else {
-      pic = picture;
+      pic = image;
     }
     const material = await MaterialModel.create({
       name,
@@ -32,16 +33,17 @@ module.exports.newMaterial = async (req, res) => {
     res.status(201).json({ material: material._id });
   } catch (error) {
     console.log(error);
+    res.status(500).json({error: error.message})
   }
 };
 //route ok
 module.exports.getAllMaterials = async (req, res) => {
-  const materials = await MaterialModel.find();
+  const materials = await MaterialModel.find().populate("owner");
   res.json(materials);
 };
 // route ok
 module.exports.getOneMaterial = async (req, res) => {
-  const material = await MaterialModel.findById(req.params.id);
+  const material = await MaterialModel.findById(req.params.id).populate("owner");
   res.json(material);
 };
 
