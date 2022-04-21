@@ -101,11 +101,9 @@ module.exports.deleteMaterial = async (req, res) => {
 module.exports.updateMaterial = async (req, res) => {
   try {
     const updatedMat = await MaterialModel.findByIdAndUpdate(
-      { _id: req.params.id },
+      req.params.id,
       req.body,
-      {
-        new: true,
-      }
+      { new: true, upsert: true, setDefaultsOnInsert: true }
     );
     res.status(201).json(updatedMat);
   } catch (error) {
