@@ -39,6 +39,7 @@ module.exports.deleteUser = async (req, res) => {
     return res.status(400).send("ID unknown : " + req.params.id);
   try {
     await UserModel.findByIdAndDelete({ _id: req.params.id });
+    await MaterialModel.deleteMany({ owner: req.params.id });
     res.status(200).json({ message: "successfully deleted " }); //pour envoyer un message au front
   } catch (error) {
     console.log(error);

@@ -60,6 +60,15 @@ module.exports.deleteMaterial = async (req, res) => {
     console.log(error);
   }
 };
+
+module.exports.deleteManyMaterial = async (req, res) => {
+  try {
+    await MaterialModel.deleteMany({ owner: req.params.id });
+    res.status(200).json({ message: "Item successfully deleted " });
+  } catch (error) {
+    console.log(error);
+  }
+};
 //route ok
 // module.exports.updateMaterial = async (req, res) => {
 //   try {
