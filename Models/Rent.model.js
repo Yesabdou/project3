@@ -31,7 +31,6 @@ const rentSchema = new mongoose.Schema(
       type: String,
       enum: ["En cours", "Rendu", "A venir"],
       default: "A venir",
-      required: true,
     },
 
     rentedTo: {
