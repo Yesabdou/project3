@@ -7,8 +7,14 @@ const axios = require("axios");
 
 //route ok
 module.exports.signUp = async (req, res) => {
-  const { pseudo, adresse, finess, email, password } = req.body;
-  console.log(req.body)
+  const { pseudo, adresse, finess, email, password, picture, bio } = req.body;
+  let pic;
+  if (req.file) {
+    pic = req.file.path;
+  } else {
+    pic = picture;
+  }
+  console.log(req.body);
 
   const str = adresse.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // pour enlever les accents des e et a pour la requette
 
@@ -30,6 +36,8 @@ module.exports.signUp = async (req, res) => {
       password,
       latitude,
       longitude,
+      picture: pic,
+      bio,
     });
     res.status(201).json({
       Association: ` l'Association  ${user.pseudo} a été créée avec succés`,
@@ -63,8 +71,8 @@ module.exports.signIn = async (req, res) => {
       algorithm: "HS256",
       expiresIn: "1h",
     });
-    res.status(200).send({ authToken: authToken , id: foundUser._id });
-    
+    res.status(200).send({ authToken: authToken, id: foundUser._id });
+
     return;
   } else {
     res.status(401).json({ error: "Mot de pass incorrect" });
