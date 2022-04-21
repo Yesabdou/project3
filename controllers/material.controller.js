@@ -61,35 +61,50 @@ module.exports.deleteMaterial = async (req, res) => {
   }
 };
 //route ok
+// module.exports.updateMaterial = async (req, res) => {
+//   try {
+//     const {
+//       name,
+//       ref,
+//       category,
+//       description,
+//       condition,
+//       ageMin,
+//       ageMax,
+//       picture,
+//       owner,
+//     } = req.body;
+//     let pic;
+//     if (req.file) {
+//       pic = req.file.path;
+//     } else {
+//       pic = picture;
+//     }
+
+//     const updatedMat = await MaterialModel.findByIdAndUpdate({
+//       name,
+//       ref,
+//       category,
+//       description,
+//       condition,
+//       ageMin,
+//       ageMax,
+//       picture: pic,
+//       owner,
+//     });
+//     res.status(201).json(updatedMat);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
 module.exports.updateMaterial = async (req, res) => {
   try {
-    const {
-      name,
-      ref,
-      category,
-      description,
-      condition,
-      ageMin,
-      ageMax,
-      picture,
-    } = req.body;
-    let pic;
-    if (req.file) {
-      pic = req.file.path;
-    } else {
-      pic = picture;
-    }
-
-    const updatedMat = await MaterialModel.findByIdAndUpdate({
-      name,
-      ref,
-      category,
-      description,
-      condition,
-      ageMin,
-      ageMax,
-      picture: pic,
-    });
+    const updatedMat = await MaterialModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, upsert: true, setDefaultsOnInsert: true }
+    );
     res.status(201).json(updatedMat);
   } catch (error) {
     console.log(error);
