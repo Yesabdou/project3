@@ -16,7 +16,6 @@ const materialSchema = new mongoose.Schema(
     },
     category: {
       type: String,
-      enum: ["Fauteuil roulant", "Chaise adaptée", "Matériel ludique"],
       default: "",
     },
     description: {
@@ -29,7 +28,6 @@ const materialSchema = new mongoose.Schema(
     },
     condition: {
       type: String,
-      enum: ["Etat neuf", "Très bon état", "Bon état", "Etat satisfaisant"],
       default: "",
     },
     ageMin: {
