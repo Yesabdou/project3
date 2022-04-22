@@ -24,9 +24,7 @@ module.exports.updateUser = async (req, res) => {
   try {
     const updatedUser = await UserModel.findByIdAndUpdate(
       req.params.id,
-
       req.body,
-      // { $set: { bio: req.body.bio, finess: req.body.finess, phone:req.body.phone,  } },
       { new: true, upsert: true, setDefaultsOnInsert: true }
     );
     res.status(201).json(updatedUser);
@@ -47,7 +45,7 @@ module.exports.deleteUser = async (req, res) => {
 };
 
 //...........................................
-//fonction qui ajoute le matériel de l'utilisateur et vis versa
+//fonction qui ajoute le matériel de l'utilisateur et vice versa
 module.exports.addWishlist = async (req, res) => {
   const userId = req.params.id;
   console.log(` --------the id of the user is  ${userId}`);
@@ -60,7 +58,7 @@ module.exports.addWishlist = async (req, res) => {
     { new: true, upsert: true }
   );
 };
-//fonction qui supprimer le matériel de l'utilisateur et vis versa
+//fonction qui supprimer le matériel de l'utilisateur et vice versa
 module.exports.deleteWishlist = async (req, res) => {
   const userId = req.params.id;
   await UserModel.findByIdAndUpdate(

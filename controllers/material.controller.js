@@ -1,6 +1,6 @@
 const MaterialModel = require("../Models/material.model");
 
-//route ok / faire le liens avec owner
+//route ok
 module.exports.newMaterial = async (req, res) => {
   try {
     console.log("i am in the back");
@@ -69,43 +69,6 @@ module.exports.deleteManyMaterial = async (req, res) => {
     console.log(error);
   }
 };
-//route ok
-// module.exports.updateMaterial = async (req, res) => {
-//   try {
-//     const {
-//       name,
-//       ref,
-//       category,
-//       description,
-//       condition,
-//       ageMin,
-//       ageMax,
-//       picture,
-//       owner,
-//     } = req.body;
-//     let pic;
-//     if (req.file) {
-//       pic = req.file.path;
-//     } else {
-//       pic = picture;
-//     }
-
-//     const updatedMat = await MaterialModel.findByIdAndUpdate({
-//       name,
-//       ref,
-//       category,
-//       description,
-//       condition,
-//       ageMin,
-//       ageMax,
-//       picture: pic,
-//       owner,
-//     });
-//     res.status(201).json(updatedMat);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 module.exports.updateMaterial = async (req, res) => {
   try {
