@@ -4,19 +4,21 @@ const MaterialModel = require("../Models/material.model");
 const ObjectID = require("mongoose").Types.ObjectId;
 
 module.exports.getAllUsers = async (req, res) => {
-  const users = await UserModel.find().select("-password"); // select permet de pas renvoyer certaines infos
+  const users = await UserModel.find().select("-password"); // get all the users without password
   res.json(users);
 };
 
 module.exports.getOneUser = async (req, res) => {
+  //if the id is valid return the user  without password , else send message.
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
-  const user = await UserModel.findById(req.params.id).select("-password");
+  const user = await UserModel.findById(req.params.id).select("-password"); // return the user without the psw
   res.json(user);
 };
 
 module.exports.updateUser = async (req, res) => {
-  console.log(req.params.id);
+  // usind PUT
+  // console.log(req.params.id);
 
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
@@ -26,8 +28,8 @@ module.exports.updateUser = async (req, res) => {
       req.params.id,
 
       req.body,
-      // { $set: { bio: req.body.bio, finess: req.body.finess, phone:req.body.phone,  } },
-      { new: true, upsert: true, setDefaultsOnInsert: true }
+      // for test only with bio  { $set: { bio: req.body.bio, finess: req.body.finess, phone:req.body.phone,  } },
+      { new: true, upsert: true, setDefaultsOnInsert: true } // mandatory params
     );
     res.status(201).json(updatedUser);
   } catch (error) {
@@ -46,7 +48,7 @@ module.exports.deleteUser = async (req, res) => {
 };
 
 //...........................................
-//fonction qui ajoute le matériel de l'utilisateur et vis versa
+//relation many to many : must use populate
 module.exports.addWishlist = async (req, res) => {
   const userId = req.params.id;
   console.log(` --------the id of the user is  ${userId}`);
@@ -59,7 +61,7 @@ module.exports.addWishlist = async (req, res) => {
     { new: true, upsert: true }
   );
 };
-//fonction qui supprimer le matériel de l'utilisateur et vis versa
+//
 module.exports.deleteWishlist = async (req, res) => {
   const userId = req.params.id;
   await UserModel.findByIdAndUpdate(

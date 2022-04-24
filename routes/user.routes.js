@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const authController = require("../controllers/auth.controller");
-const logoUserController = require("../controllers/logoUser.constroller");
 const userController = require("../controllers/user.controller");
 const RentController = require("../controllers/rent.controller");
 
@@ -13,12 +12,16 @@ router.post("/register", authController.signUp);
 router.post("/login", authController.signIn);
 
 //user DB
-router.get("/", userController.getAllUsers);
-router.get("/:id", userController.getOneUser);
-router.put("/:id/update", userController.updateUser);
-router.delete("/:id/delete", userController.deleteUser);
-router.patch("/addWishlist/:id", userController.addWishlist);
-router.patch("/delWishlist/:id", userController.deleteWishlist);
+router.get("/", isAuthenticated, userController.getAllUsers);
+router.get("/:id", isAuthenticated, userController.getOneUser);
+router.put("/:id/update", isAuthenticated, userController.updateUser);
+router.delete("/:id/delete", isAuthenticated, userController.deleteUser);
+router.patch("/addWishlist/:id", isAuthenticated, userController.addWishlist);
+router.patch(
+  "/delWishlist/:id",
+  isAuthenticated,
+  userController.deleteWishlist
+);
 
 //rent route
 router.get("/:userid/all-rents", RentController.seeAllRentsForOneUser); // route OK

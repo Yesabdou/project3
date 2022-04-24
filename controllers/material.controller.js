@@ -1,6 +1,6 @@
 const MaterialModel = require("../Models/material.model");
 
-//route ok / faire le liens avec owner
+//route ok
 module.exports.newMaterial = async (req, res) => {
   try {
     const {
@@ -57,7 +57,6 @@ module.exports.deleteMaterial = async (req, res) => {
 //route ok
 module.exports.updateMaterial = async (req, res) => {
   try {
-
     const updatedMat = await MaterialModel.findByIdAndUpdate(
       req.params.id,
       req.body,
