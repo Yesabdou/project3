@@ -14,12 +14,14 @@ const UserModel = require("./Models/user.model");
 
 const app = express();
 
-app.use(
-  cors({
-    credentials: true,
-    origin: JSON.parse(process.env.ORIGIN) ||  ['http://localhost:3000' , "https://latomette.netlify.app"] 
-  })
-);
+//app.use(
+  //cors({
+    //credentials: true,
+    //origin: JSON.parse(process.env.ORIGIN) ||  ['http://localhost:3000' , "https://latomette.netlify.app"] 
+  //})
+//);
+
+app.use(cors())
 
 app.set('trust proxy', 1);
 
